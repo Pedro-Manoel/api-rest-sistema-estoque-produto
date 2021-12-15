@@ -11,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ErrorMessageDTO {
 
-    private String erro;
+    private String erroMessageDTO;
 
 }
