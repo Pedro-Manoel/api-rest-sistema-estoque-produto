@@ -3,4 +3,5 @@ import br.com.estoque.model.TipoProduto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TipoProdutoRepository extends JpaRepository<TipoProduto, Long> {
+    public boolean existsByNome(String nome);
 }

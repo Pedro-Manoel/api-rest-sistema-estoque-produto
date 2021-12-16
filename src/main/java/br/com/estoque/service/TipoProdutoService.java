@@ -1,5 +1,6 @@
 package br.com.estoque.service;
 
+import br.com.estoque.exception.TipoProdutoExistenteException;
 import br.com.estoque.exception.TipoProdutoNaoExisteException;
 import br.com.estoque.model.TipoProduto;
 import br.com.estoque.repository.TipoProdutoRepository;
@@ -18,7 +19,14 @@ public class TipoProdutoService {
         return tipoProdutoRepository.findById(id).orElseThrow(()-> new TipoProdutoNaoExisteException(id));
     }
 
-    public TipoProduto criarTipoProduto(TipoProduto tipoProduto) {
+    public TipoProduto criarTipoProduto(String nome) {
+        if (tipoProdutoRepository.existsByNome(nome)) {
+            throw new TipoProdutoExistenteException(nome);
+        }
+
+        TipoProduto tipoProduto = new TipoProduto();
+        tipoProduto.setNome(nome);
+
         return tipoProdutoRepository.save(tipoProduto);
     }
 
