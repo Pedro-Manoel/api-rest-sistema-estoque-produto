@@ -15,12 +15,12 @@ public class TipoProdutoService {
     @Autowired
     private TipoProdutoRepository tipoProdutoRepository;
 
-    public TipoProduto getTipoProdutoById(String nome) {
-        return tipoProdutoRepository.findById(nome).orElseThrow(()-> new TipoProdutoNaoExisteException(nome));
+    public TipoProduto getTipoProdutoById(Long id) {
+        return tipoProdutoRepository.findById(id).orElseThrow(()-> new TipoProdutoNaoExisteException(id));
     }
 
     public TipoProduto criarTipoProduto(String nome) {
-        if (tipoProdutoRepository.existsById(nome)) {
+        if (tipoProdutoRepository.existsByNome(nome)) {
             throw new TipoProdutoExistenteException(nome);
         }
 

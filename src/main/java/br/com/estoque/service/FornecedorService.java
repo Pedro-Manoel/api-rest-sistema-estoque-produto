@@ -3,6 +3,7 @@ package br.com.estoque.service;
 import br.com.estoque.exception.FornecedorNaoExisteException;
 import br.com.estoque.model.Fornecedor;
 import br.com.estoque.repository.FornecedorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @Service
 public class FornecedorService {
 
+    @Autowired
     private FornecedorRepository fornecedorRepository;
 
     public Fornecedor getFornecedorById(Long id) {

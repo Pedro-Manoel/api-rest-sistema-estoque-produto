@@ -23,15 +23,15 @@ public class Fornecedor {
     private String nome;
     private String cnpj;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "fornecedor_id")
     List<Telefone> telefones;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "fornecedor_id")
     List<Email> emails;
 }

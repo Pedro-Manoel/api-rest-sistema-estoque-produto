@@ -1,6 +1,5 @@
 package br.com.estoque.dto;
 
-import br.com.estoque.model.Endereco;
 import br.com.estoque.model.Fornecedor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

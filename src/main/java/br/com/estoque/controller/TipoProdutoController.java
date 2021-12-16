@@ -1,5 +1,6 @@
 package br.com.estoque.controller;
 
+import br.com.estoque.dto.TipoProdutoDTO;
 import br.com.estoque.model.TipoProduto;
 import br.com.estoque.service.TipoProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,29 +22,28 @@ public class TipoProdutoController {
     public ResponseEntity<?> listarTiposProdutos(){
         List<TipoProduto> listaTiposProdutos = tipoProdutoService.listarTiposProduto();
 
-        return new ResponseEntity<List<TipoProduto>>(listaTiposProdutos, HttpStatus.OK);
+        return new ResponseEntity<>(listaTiposProdutos, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<?> criarTipoProduto(@RequestBody TipoProdutoRequestDTO tipoProdutoRequestDTO) {
-        TipoProduto tipoProduto = tipoProdutoService.criarTipoProduto(tipoProdutoRequestDTO.getNome());
+    public ResponseEntity<?> criarTipoProduto(@RequestBody TipoProdutoDTO tipoProdutoDTO) {
+        TipoProduto tipoProduto = tipoProdutoService.criarTipoProduto(tipoProdutoDTO.getNome());
 
-        return new ResponseEntity<TipoProduto>(tipoProduto, HttpStatus.OK);
+        return new ResponseEntity<>(tipoProduto, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> removerTipoProduto(@PathVariable("id") Long id) {
+    public ResponseEntity<?> removerTipoProduto(@PathVariable ("id") Long id) {
         tipoProdutoService.removerTipoProduto(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizarTipoProduto(@PathVariable ("id") Long id,
-                                                  @RequestBody TipoProdutoRequestDTO tipoProdutoRequestDTO){
-        TipoProduto tipoProduto = tipoProdutoService.criarTipoProduto(tipoProdutoRequestDTO.getNome());
+    public ResponseEntity<?> atualizarTipoProduto(@PathVariable ("id") Long id, @RequestBody TipoProdutoDTO tipoProdutoDTO){
+        TipoProduto tipoProduto = TipoProdutoDTO.toEntity(tipoProdutoDTO);
         TipoProduto novoTipoProduto = tipoProdutoService.atualizarTipoProduto(id, tipoProduto);
 
-        return new ResponseEntity<TipoProduto>(novoTipoProduto, HttpStatus.OK);
+        return new ResponseEntity<>(novoTipoProduto, HttpStatus.OK);
     }
 }

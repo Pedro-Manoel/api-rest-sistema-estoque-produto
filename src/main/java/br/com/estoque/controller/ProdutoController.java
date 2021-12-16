@@ -1,5 +1,6 @@
 package br.com.estoque.controller;
 
+import br.com.estoque.dto.ProdutoDTO;
 import br.com.estoque.model.Fornecedor;
 import br.com.estoque.model.Produto;
 import br.com.estoque.model.TipoProduto;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -26,18 +29,45 @@ public class ProdutoController {
     ProdutoService produtoService;
 
     @PostMapping
-    public ResponseEntity<?> criarProduto(@RequestBody ProdutoRequestDTO produtoRequestDTO) {
+    public ResponseEntity<?> criarProduto (@RequestBody ProdutoDTO produtoDTO) {
+        Fornecedor fornecedor = fornecedorService.getFornecedorById(produtoDTO.getFornecedorId());
+        TipoProduto tipoProduto = tipoProdutoService.getTipoProdutoById(produtoDTO.getTipoProdutoId());
 
-        Fornecedor fornecedor = fornecedorService.getFornecedorById(produtoRequestDTO.getFornecedorId());
-        TipoProduto tipoProduto = tipoProdutoService.getTipoProdutoById(produtoRequestDTO.getTipoId());
+        Produto produto = ProdutoDTO.toEntity(produtoDTO);
+        produto.setFornecedor(fornecedor);
+        produto.setTipo(tipoProduto);
 
-        Produto produto = new Produto(produtoRequestDTO.getTipoId(), produtoRequestDTO.getNome(), produtoRequestDTO.getPrecoVenda(),
-                produtoRequestDTO.getPrecoCompra(), produtoRequestDTO.getQttEstoque(), fornecedor, tipoProduto);
+        ProdutoDTO produtoCriado = ProdutoDTO.toDTO(produtoService.criarProduto(produto));
 
-        Produto produtoCriado = produtoService.criarProduto(produto);
-
-        return new ResponseEntity<Produto>(produtoCriado, HttpStatus.OK);
+        return new ResponseEntity<>(produtoCriado, HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<?> listarProdutos () {
+        List<Produto> produtos = produtoService.listarProdutos();
+
+        return new ResponseEntity<>(produtos, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> removerProduto (@PathVariable("id") Long id) {
+        produtoService.removerProduto(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> atualizarProduto(@PathVariable("id") Long id, @RequestBody ProdutoDTO produtoDTO){
+        Fornecedor fornecedor = fornecedorService.getFornecedorById(produtoDTO.getFornecedorId());
+        TipoProduto tipoProduto = tipoProdutoService.getTipoProdutoById(produtoDTO.getTipoProdutoId());
+
+        Produto produto = ProdutoDTO.toEntity(produtoDTO);
+        produto.setFornecedor(fornecedor);
+        produto.setTipo(tipoProduto);
+
+        Produto produtoAtualizado = produtoService.atualizarProduto(id, produto);
+
+        return new ResponseEntity<>(produtoAtualizado, HttpStatus.OK);
+    }
 
 }

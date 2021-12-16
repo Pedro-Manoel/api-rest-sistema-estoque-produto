@@ -21,9 +21,8 @@ public class ProdutoDTO {
     private BigDecimal precoVenda;
     private BigDecimal precoCompra;
     private Long qttEstoque;
-
-    private FornecedorDTO fornecedor;
-    private TipoProdutoDTO tipoProduto;
+    private Long fornecedorId;
+    private Long tipoProdutoId;
 
     public static Produto toEntity(ProdutoDTO produtoDTO) {
         Produto produto = new Produto();
@@ -31,21 +30,19 @@ public class ProdutoDTO {
         produto.setPrecoVenda(produtoDTO.getPrecoVenda());
         produto.setPrecoCompra(produtoDTO.getPrecoCompra());
         produto.setQttEstoque(produtoDTO.getQttEstoque());
-        produto.setFornecedor(FornecedorDTO.toEntity(produtoDTO.getFornecedor()));
-        produto.setTipo(TipoProdutoDTO.toEntity(produtoDTO.getTipoProduto()));
-
 
         return produto;
     }
 
     public static ProdutoDTO toDTO(Produto produto) {
         ProdutoDTO produtoDTO = new ProdutoDTO();
+        produtoDTO.setId(produto.getId());
         produtoDTO.setNome(produto.getNome());
         produtoDTO.setPrecoVenda(produto.getPrecoVenda());
         produtoDTO.setPrecoCompra(produto.getPrecoCompra());
         produtoDTO.setQttEstoque(produto.getQttEstoque());
-        produtoDTO.setFornecedor(FornecedorDTO.toDTO(produto.getFornecedor()));
-        produtoDTO.setTipoProduto(TipoProdutoDTO.toDTO(produto.getTipo()));
+        produtoDTO.setFornecedorId(produto.getFornecedor().getId());
+        produtoDTO.setTipoProdutoId(produto.getTipo().getId());
 
         return produtoDTO;
     }

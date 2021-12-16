@@ -1,7 +1,6 @@
 package br.com.estoque.dto;
 
 import br.com.estoque.model.Email;
-import br.com.estoque.model.Telefone;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

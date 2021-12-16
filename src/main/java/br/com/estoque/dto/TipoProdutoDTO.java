@@ -1,6 +1,5 @@
 package br.com.estoque.dto;
 
-import br.com.estoque.model.Produto;
 import br.com.estoque.model.TipoProduto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +16,7 @@ public class TipoProdutoDTO {
 
     public static TipoProduto toEntity(TipoProdutoDTO tipoProdutoDTO) {
         TipoProduto tipoProduto = new TipoProduto();
-        tipoProduto.setNome(tipoProduto.getNome());
+        tipoProduto.setNome(tipoProdutoDTO.getNome());
 
         return tipoProduto;
     }

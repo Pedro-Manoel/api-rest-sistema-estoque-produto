@@ -1,5 +1,7 @@
 package br.com.estoque.controller;
 
+import br.com.estoque.dto.FornecedorDTO;
+import br.com.estoque.dto.ProdutoDTO;
 import br.com.estoque.model.Fornecedor;
 import br.com.estoque.service.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,15 @@ public class FornecedorController {
     public ResponseEntity<?> listarFornecedores(){
         List<Fornecedor> listaFornecedores = fornecedorService.listarFornecedores();
 
-        return new ResponseEntity<List<Fornecedor>>(listaFornecedores, HttpStatus.OK);
+        return new ResponseEntity<>(listaFornecedores, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> criarFornecedor(@RequestBody FornecedorDTO fornecedorDTO){
+        Fornecedor fornecedor = FornecedorDTO.toEntity(fornecedorDTO);
+        Fornecedor fornecedorCriado = fornecedorService.criarFornecedor(fornecedor);
+
+        return new ResponseEntity<>(fornecedorCriado, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -31,13 +41,14 @@ public class FornecedorController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<?> atualizarFornecedor(@PathVariable ("id") Long id,
-//                                                 @RequestBody FornecedortDTO fornecedorRequestDTO){
-//        Fornecedor fornecedor = fornecedorService.criarFornecedor(fornecedorRequestDTO.get);
-//        TipoProduto novoTipoProduto = tipoProdutoService.atualizarTipoProduto(id, tipoProduto);
-//
-//        return new ResponseEntity<TipoProduto>(novoTipoProduto, HttpStatus.OK);
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<?> atualizarFornecedor(@PathVariable("id") Long id, @RequestBody FornecedorDTO fornecedorDTO){
+        Fornecedor fornecedor = FornecedorDTO.toEntity(fornecedorDTO);
+        Fornecedor fornecedorAtualizado = fornecedorService.atualizarFornecedor(id, fornecedor);
+
+        return new ResponseEntity<>(fornecedorAtualizado, HttpStatus.OK);
+    }
+
+
 
 }
