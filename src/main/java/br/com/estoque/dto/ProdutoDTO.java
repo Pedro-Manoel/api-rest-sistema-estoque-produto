@@ -2,12 +2,14 @@ package br.com.estoque.dto;
 
 import br.com.estoque.model.Fornecedor;
 import br.com.estoque.model.Produto;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
@@ -16,7 +18,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ProdutoDTO {
 
+    @ApiModelProperty(hidden = true)
     private Long id;
+
     private String nome;
     private BigDecimal precoVenda;
     private BigDecimal precoCompra;
@@ -26,6 +30,7 @@ public class ProdutoDTO {
 
     public static Produto toEntity(ProdutoDTO produtoDTO) {
         Produto produto = new Produto();
+        produto.setId(produtoDTO.getId());
         produto.setNome(produtoDTO.getNome());
         produto.setPrecoVenda(produtoDTO.getPrecoVenda());
         produto.setPrecoCompra(produtoDTO.getPrecoCompra());
@@ -45,5 +50,12 @@ public class ProdutoDTO {
         produtoDTO.setTipoProdutoId(produto.getTipo().getId());
 
         return produtoDTO;
+    }
+
+    public static List<ProdutoDTO> toDTOs(List<Produto> produtos) {
+        return produtos
+                .stream()
+                .map(ProdutoDTO::toDTO)
+                .collect(Collectors.toList());
     }
 }

@@ -22,4 +22,8 @@ public class Telefone {
     private Long id;
 
     private String telefone;
+
+    public Telefone(String telefone) {
+        this.telefone = telefone;
+    }
 }

@@ -1,7 +1,6 @@
 package br.com.estoque.controller;
 
 import br.com.estoque.dto.FornecedorDTO;
-import br.com.estoque.dto.ProdutoDTO;
 import br.com.estoque.model.Fornecedor;
 import br.com.estoque.service.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +20,24 @@ public class FornecedorController {
 
     @GetMapping
     public ResponseEntity<?> listarFornecedores(){
-        List<Fornecedor> listaFornecedores = fornecedorService.listarFornecedores();
+        List<FornecedorDTO> fornecedoresDTO = FornecedorDTO.toDTOs(fornecedorService.listarFornecedores());
 
-        return new ResponseEntity<>(listaFornecedores, HttpStatus.OK);
+        return new ResponseEntity<>(fornecedoresDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> retornarFornecedor(@PathVariable("id") Long id){
+        FornecedorDTO fornecedorDTO = FornecedorDTO.toDTO(fornecedorService.getFornecedorById(id));
+
+        return new ResponseEntity<>(fornecedorDTO, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<?> criarFornecedor(@RequestBody FornecedorDTO fornecedorDTO){
         Fornecedor fornecedor = FornecedorDTO.toEntity(fornecedorDTO);
-        Fornecedor fornecedorCriado = fornecedorService.criarFornecedor(fornecedor);
+        FornecedorDTO fornecedorCriadoDTO = FornecedorDTO.toDTO(fornecedorService.criarFornecedor(fornecedor));
 
-        return new ResponseEntity<>(fornecedorCriado, HttpStatus.OK);
+        return new ResponseEntity<>(fornecedorCriadoDTO, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -44,9 +50,9 @@ public class FornecedorController {
     @PutMapping("/{id}")
     public ResponseEntity<?> atualizarFornecedor(@PathVariable("id") Long id, @RequestBody FornecedorDTO fornecedorDTO){
         Fornecedor fornecedor = FornecedorDTO.toEntity(fornecedorDTO);
-        Fornecedor fornecedorAtualizado = fornecedorService.atualizarFornecedor(id, fornecedor);
+        FornecedorDTO fornecedorAtualizadoDTO = FornecedorDTO.toDTO(fornecedorService.atualizarFornecedor(id, fornecedor));
 
-        return new ResponseEntity<>(fornecedorAtualizado, HttpStatus.OK);
+        return new ResponseEntity<>(fornecedorAtualizadoDTO, HttpStatus.OK);
     }
 
 

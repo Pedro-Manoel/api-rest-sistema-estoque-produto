@@ -18,8 +18,7 @@ public class SwaggerConfig {
     public Docket api () {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("br.com.estoque.controller"))
-                .paths(PathSelectors.ant("/api/*"))
+                .apis(RequestHandlerSelectors.basePackage("br.com.estoque"))
                 .build()
                 .apiInfo(apiInfo());
     }

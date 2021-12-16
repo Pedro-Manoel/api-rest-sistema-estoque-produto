@@ -18,7 +18,5 @@ public class TipoProduto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
     private String nome;
-
 }

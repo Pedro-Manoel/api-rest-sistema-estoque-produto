@@ -1,47 +1,19 @@
 package br.com.estoque.service;
 
-import br.com.estoque.exception.ProdutoNaoExisteException;
 import br.com.estoque.model.Produto;
-import br.com.estoque.repository.ProdutoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class ProdutoService  {
+public interface ProdutoService {
+    Produto getProdutoById (Long id);
 
-    @Autowired
-    private ProdutoRepository produtoRepository;
+    Produto criarProduto(Produto produto);
 
-    public Produto getProdutoById (Long id) {
-        return produtoRepository.findById(id)
-                .orElseThrow(() -> new ProdutoNaoExisteException(id));
-    }
+    List<Produto> listarProdutos ();
 
-    public Produto criarProduto(Produto produto) {
-        return produtoRepository.save(produto);
-    }
+    void removerProduto (Long id);
 
-    public List<Produto> listarProdutos () {
-        return produtoRepository.findAll();
-    }
+    Produto atualizarProduto (Long id, Produto produto);
 
-    public void removerProduto (Long id) {
-        Produto produto = getProdutoById(id);
-        produtoRepository.delete(produto);
-    }
-
-    public Produto atualizarProduto (Long id, Produto produto) {
-        Produto produtoNovo = getProdutoById(id);
-
-        produtoNovo.setTipo(produto.getTipo());
-        produtoNovo.setFornecedor(produto.getFornecedor());
-        produtoNovo.setNome(produto.getNome());
-        produtoNovo.setPrecoCompra(produto.getPrecoCompra());
-        produtoNovo.setPrecoVenda(produto.getPrecoVenda());
-
-        return produtoRepository.save(produtoNovo);
-
-    }
+    Produto atualizarEstoqueProduto (Long id, Long novoEstoque);
 }

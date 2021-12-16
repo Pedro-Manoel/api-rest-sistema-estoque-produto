@@ -22,4 +22,8 @@ public class Email {
     private Long id;
 
     private String email;
+
+    public Email (String email) {
+        this.email = email;
+    }
 }

@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ErrorMessageDTO {
+public class ProdutoEstoqueDTO {
 
-    private String errorMessage;
-
+    private Long qttEstoque;
 }
