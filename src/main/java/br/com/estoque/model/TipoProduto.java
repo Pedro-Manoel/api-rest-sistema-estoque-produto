@@ -18,9 +18,6 @@ import javax.persistence.Id;
 public class TipoProduto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String nome;
 
 }

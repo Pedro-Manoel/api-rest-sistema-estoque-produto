@@ -1,6 +1,5 @@
 package br.com.estoque.controller;
 
-import br.com.estoque.dto.ProdutoRequestDTO;
 import br.com.estoque.model.Fornecedor;
 import br.com.estoque.model.Produto;
 import br.com.estoque.model.TipoProduto;

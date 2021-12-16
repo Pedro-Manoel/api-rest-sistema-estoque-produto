@@ -1,6 +1,5 @@
 package br.com.estoque.controller;
 
-import br.com.estoque.dto.TipoProdutoRequestDTO;
 import br.com.estoque.model.TipoProduto;
 import br.com.estoque.service.TipoProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;

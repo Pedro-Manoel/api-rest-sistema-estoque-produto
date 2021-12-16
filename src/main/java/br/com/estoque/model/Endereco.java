@@ -20,15 +20,11 @@ public class Endereco {
 
     private String cep;
 
-    @OneToOne
-    @JoinColumn(name = "rua_id")
-    private Rua rua;
+    private String rua;
 
-    @OneToOne
-    @JoinColumn(name = "bairro_id")
-    private Bairro bairro;
+    private String bairro;
 
-    @OneToOne
-    @JoinColumn(name = "cidade_id")
-    private Cidade cidade;
+    private String cidade;
+
+    private String uf;
 }

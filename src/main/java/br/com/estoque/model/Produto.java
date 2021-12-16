@@ -31,4 +31,6 @@ public class Produto {
     @OneToOne
     @JoinColumn(name = "tipo_id")
     private TipoProduto tipo;
+
+
 }
