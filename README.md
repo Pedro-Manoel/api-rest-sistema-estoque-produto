@@ -23,29 +23,29 @@ API de estoque de produtos desenvolvida em [Spring Boot](https://spring.io/proje
 
 1. Faça o clone do repositório:
 
-```sh
-  $ git clone https://github.com/Pedro-Manoel/api-rest-sistema-estoque-produto.git
-```
+	```sh
+	  $ git clone https://github.com/Pedro-Manoel/api-rest-sistema-estoque-produto.git
+	```
 
 2. Entre na pasta do projeto:
 
-```sh
-  $ cd api-rest-sistema-estoque-produto
-```
+	```sh
+	  $ cd api-rest-sistema-estoque-produto
+	```
 
 3. Execute o seguinte comando
     
     1. Para executar a aplicação: 
     
-    ```sh
-    $ mvn spring-boot:run
-    ```
+	    ```sh
+	    $ mvn spring-boot:run
+	    ```
 
     2. Para executar os testes:
 
-    ```sh
-    $ mvn test
-    ```
+	    ```sh
+	    $ mvn test
+	    ```
 ## 🔰 Rotas da Aplicação
 
 Um demostrativo do funcionamento das rotas da API utilizando dados fictícios. As rotas são as seguintes:
