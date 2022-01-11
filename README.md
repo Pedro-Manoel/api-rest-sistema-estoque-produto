@@ -3,8 +3,7 @@
 </h1>
 
 <p align="center">
-    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Pedro-Manoel/
-api-rest-sistema-estoque-produto?style=flat-square">
+    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Pedro-Manoel/api-rest-sistema-estoque-produto?style=flat-square">
     <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/Pedro-Manoel/api-rest-sistema-estoque-produto?style=flat-square">
     <img alt="Repository size" src="https://img.shields.io/github/repo-size/Pedro-Manoel/api-rest-sistema-estoque-produto?style=flat-square">
     <img alt="GitHub license" src="https://img.shields.io/github/license/Pedro-Manoel/api-rest-sistema-estoque-produto?style=flat-square"><br/>
