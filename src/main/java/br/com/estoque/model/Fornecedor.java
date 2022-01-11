@@ -1,15 +1,11 @@
 package br.com.estoque.model;
 
-import io.swagger.models.properties.EmailProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,18 +16,16 @@ public class Fornecedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
-    private String cnpj;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fornecedor_id")
-    List<Telefone> telefones;
+    private String nome;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fornecedor_id")
-    List<Email> emails;
+    @Column(unique = true)
+    private String cnpj;
+
+    private String telefone;
+
+    private String email;
 }

@@ -1,6 +1,7 @@
 package br.com.estoque.exception.controller;
 
 import br.com.estoque.dto.ErrorMessageDTO;
+import br.com.estoque.exception.ProdutoExistenteException;
 import br.com.estoque.exception.ProdutoNaoExisteException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,4 +19,11 @@ public class ProdutoExceptionController {
         );
     }
 
+    @ExceptionHandler(ProdutoExistenteException.class)
+    public ResponseEntity<ErrorMessageDTO> handleException(ProdutoExistenteException exception){
+        return new ResponseEntity<>(
+                new ErrorMessageDTO(exception.getMessage()),
+                HttpStatus.BAD_REQUEST
+        );
+    }
 }

@@ -3,7 +3,6 @@ package br.com.estoque.exception.controller;
 import br.com.estoque.dto.ErrorMessageDTO;
 import br.com.estoque.exception.FornecedorExistenteException;
 import br.com.estoque.exception.FornecedorNaoExisteException;
-import br.com.estoque.exception.ProdutoNaoExisteException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -27,5 +26,4 @@ public class FornecedorExceptionController {
                 HttpStatus.BAD_REQUEST
         );
     }
-
 }

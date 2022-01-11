@@ -1,7 +1,6 @@
 package br.com.estoque.exception.controller;
 
 import br.com.estoque.dto.ErrorMessageDTO;
-import br.com.estoque.exception.FornecedorNaoExisteException;
 import br.com.estoque.exception.TipoProdutoExistenteException;
 import br.com.estoque.exception.TipoProdutoNaoExisteException;
 import org.springframework.http.HttpStatus;
@@ -27,5 +26,4 @@ public class TipoProdutoExceptionController {
                 HttpStatus.BAD_REQUEST
         );
     }
-
 }

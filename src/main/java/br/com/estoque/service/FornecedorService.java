@@ -1,17 +1,20 @@
 package br.com.estoque.service;
 
+import br.com.estoque.dto.FornecedorDTO;
 import br.com.estoque.model.Fornecedor;
 
 import java.util.List;
 
 public interface FornecedorService {
-    Fornecedor getFornecedorById(Long id);
+    Fornecedor getFornecedorById (Long id);
 
-    Fornecedor criarFornecedor(Fornecedor fornecedor);
+    FornecedorDTO getFornecedor (Long id);
 
-    void removerFornecedor(Long id);
+    FornecedorDTO criarFornecedor (FornecedorDTO fornecedorDTO);
 
-    Fornecedor atualizarFornecedor(Long id, Fornecedor novoFornecedor);
+    void removerFornecedor (Long id);
 
-    List<Fornecedor> listarFornecedores();
+    FornecedorDTO atualizarFornecedor (Long id, FornecedorDTO fornecedorDTOr);
+
+    List<FornecedorDTO> listarFornecedores ();
 }

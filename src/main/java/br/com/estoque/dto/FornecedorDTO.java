@@ -1,13 +1,8 @@
 package br.com.estoque.dto;
 
-import br.com.estoque.model.Email;
 import br.com.estoque.model.Fornecedor;
-import br.com.estoque.model.Telefone;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,44 +17,39 @@ public class FornecedorDTO {
     private Long id;
 
     private String nome;
+
     private String cnpj;
+
     private EnderecoDTO endereco;
-    List<String> telefones;
-    List<String> emails;
 
-    public static Fornecedor toEntity(FornecedorDTO fornecedorDTO) {
-        Fornecedor fornecedor = new Fornecedor();
-        fornecedor.setId(fornecedorDTO.getId());
-        fornecedor.setNome(fornecedorDTO.getNome());
-        fornecedor.setCnpj(fornecedorDTO.getCnpj());
-        fornecedor.setEndereco(EnderecoDTO.toEntity(fornecedorDTO.getEndereco()));
-        fornecedor.setEmails(fornecedorDTO.getEmails()
-                .stream().map(Email::new).collect(Collectors.toList()));
-        fornecedor.setTelefones(fornecedorDTO.getTelefones()
-                .stream().map(Telefone::new).collect(Collectors.toList()));
+    private String telefone;
 
-        return fornecedor;
+    private String email;
+
+    public FornecedorDTO (Fornecedor fornecedor) {
+        this.id = fornecedor.getId();
+        this.nome = fornecedor.getNome();
+        this.cnpj = fornecedor.getCnpj();
+        this.endereco = new EnderecoDTO(fornecedor.getEndereco());
+        this.telefone = fornecedor.getTelefone();
+        this.email = fornecedor.getEmail();
     }
 
-    public static FornecedorDTO toDTO(Fornecedor fornecedor) {
-        FornecedorDTO fornecedorDTO = new FornecedorDTO();
-        fornecedorDTO.setId(fornecedor.getId());
-        fornecedorDTO.setNome(fornecedor.getNome());
-        fornecedorDTO.setCnpj(fornecedor.getCnpj());
-        fornecedorDTO.setEndereco(EnderecoDTO.toDTO(fornecedor.getEndereco()));
-        fornecedorDTO.setEmails(fornecedor.getEmails()
-                .stream().map(Email::getEmail).collect(Collectors.toList()));
-        fornecedorDTO.setTelefones(fornecedor.getTelefones()
-                .stream().map(Telefone::getTelefone).collect(Collectors.toList()));
-
-        return fornecedorDTO;
+    public static Fornecedor toEntity (FornecedorDTO fornecedorDTO) {
+        return Fornecedor
+                .builder()
+                .nome(fornecedorDTO.getNome())
+                .cnpj(fornecedorDTO.getCnpj())
+                .endereco(EnderecoDTO.toEntity(fornecedorDTO.getEndereco()))
+                .telefone(fornecedorDTO.getTelefone())
+                .email(fornecedorDTO.getEmail())
+                .build();
     }
 
-    public static List<FornecedorDTO> toDTOs(List<Fornecedor> fornecedores) {
+    public static List<FornecedorDTO> toListDTO (List<Fornecedor> fornecedores) {
         return fornecedores
                 .stream()
-                .map(FornecedorDTO::toDTO)
+                .map(FornecedorDTO::new)
                 .collect(Collectors.toList());
     }
-
 }

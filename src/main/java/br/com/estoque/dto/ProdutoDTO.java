@@ -1,12 +1,8 @@
 package br.com.estoque.dto;
 
-import br.com.estoque.model.Fornecedor;
 import br.com.estoque.model.Produto;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,40 +18,45 @@ public class ProdutoDTO {
     private Long id;
 
     private String nome;
+
     private BigDecimal precoVenda;
+
     private BigDecimal precoCompra;
-    private Long qttEstoque;
+
+    private Long quantEstoque;
+
+    private String codBarra;
+
     private Long fornecedorId;
+
     private Long tipoProdutoId;
 
-    public static Produto toEntity(ProdutoDTO produtoDTO) {
-        Produto produto = new Produto();
-        produto.setId(produtoDTO.getId());
-        produto.setNome(produtoDTO.getNome());
-        produto.setPrecoVenda(produtoDTO.getPrecoVenda());
-        produto.setPrecoCompra(produtoDTO.getPrecoCompra());
-        produto.setQttEstoque(produtoDTO.getQttEstoque());
-
-        return produto;
+    public ProdutoDTO (Produto produto) {
+        this.id = produto.getId();
+        this.nome = produto.getNome();
+        this.precoVenda = produto.getPrecoVenda();
+        this.precoCompra = produto.getPrecoCompra();
+        this.quantEstoque = produto.getQuantEstoque();
+        this.codBarra = produto.getCodBarra();
+        this.fornecedorId = produto.getFornecedor().getId();
+        this.tipoProdutoId = produto.getTipo().getId();
     }
 
-    public static ProdutoDTO toDTO(Produto produto) {
-        ProdutoDTO produtoDTO = new ProdutoDTO();
-        produtoDTO.setId(produto.getId());
-        produtoDTO.setNome(produto.getNome());
-        produtoDTO.setPrecoVenda(produto.getPrecoVenda());
-        produtoDTO.setPrecoCompra(produto.getPrecoCompra());
-        produtoDTO.setQttEstoque(produto.getQttEstoque());
-        produtoDTO.setFornecedorId(produto.getFornecedor().getId());
-        produtoDTO.setTipoProdutoId(produto.getTipo().getId());
-
-        return produtoDTO;
+    public static Produto toEntity (ProdutoDTO produtoDTO) {
+        return Produto
+                .builder()
+                .nome(produtoDTO.getNome())
+                .precoVenda(produtoDTO.getPrecoVenda())
+                .precoCompra(produtoDTO.getPrecoCompra())
+                .quantEstoque(produtoDTO.getQuantEstoque())
+                .codBarra(produtoDTO.getCodBarra())
+                .build();
     }
 
-    public static List<ProdutoDTO> toDTOs(List<Produto> produtos) {
+    public static List<ProdutoDTO> toListDTO (List<Produto> produtos) {
         return produtos
                 .stream()
-                .map(ProdutoDTO::toDTO)
+                .map(ProdutoDTO::new)
                 .collect(Collectors.toList());
     }
 }

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProdutoEstoqueDTO {
+public class MessageDTO {
 
-    private Long quantEstoque;
+    private String message;
 }

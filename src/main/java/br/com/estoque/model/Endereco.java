@@ -1,13 +1,11 @@
 package br.com.estoque.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,6 +17,8 @@ public class Endereco {
     private Long id;
 
     private String cep;
+
+    private Long numero;
 
     private String rua;
 

@@ -1,14 +1,12 @@
 package br.com.estoque.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,11 +17,6 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
-    private BigDecimal precoVenda;
-    private BigDecimal precoCompra;
-    private Long qttEstoque;
-
     @OneToOne
     @JoinColumn(name = "fornecedor_id")
     Fornecedor fornecedor;
@@ -32,5 +25,14 @@ public class Produto {
     @JoinColumn(name = "tipo_id")
     private TipoProduto tipo;
 
+    @Column(unique = true)
+    private String codBarra;
 
+    private String nome;
+
+    private BigDecimal precoVenda;
+
+    private BigDecimal precoCompra;
+
+    private Long quantEstoque;
 }

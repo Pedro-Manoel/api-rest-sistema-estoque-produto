@@ -2,10 +2,7 @@ package br.com.estoque.dto;
 
 import br.com.estoque.model.TipoProduto;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,26 +18,22 @@ public class TipoProdutoDTO {
 
     private String nome;
 
+    public TipoProdutoDTO (TipoProduto tipoProduto) {
+        this.id = tipoProduto.getId();
+        this.nome = tipoProduto.getNome();
+    }
+
     public static TipoProduto toEntity (TipoProdutoDTO tipoProdutoDTO) {
-        TipoProduto tipoProduto = new TipoProduto();
-        tipoProduto.setNome(tipoProdutoDTO.getNome());
-        tipoProduto.setId(tipoProdutoDTO.getId());
-
-        return tipoProduto;
+        return TipoProduto
+                .builder()
+                .nome(tipoProdutoDTO.getNome())
+                .build();
     }
 
-    public static TipoProdutoDTO toDTO (TipoProduto tipoProduto) {
-        TipoProdutoDTO tipoProdutoDTO = new TipoProdutoDTO();
-        tipoProdutoDTO.setNome(tipoProduto.getNome());
-        tipoProdutoDTO.setId(tipoProduto.getId());
-
-        return tipoProdutoDTO;
-    }
-
-    public static List<TipoProdutoDTO> toDTOs (List<TipoProduto> tiposProduto) {
+    public static List<TipoProdutoDTO> toListDTO (List<TipoProduto> tiposProduto) {
         return tiposProduto
                 .stream()
-                .map(TipoProdutoDTO::toDTO)
+                .map(TipoProdutoDTO::new)
                 .collect(Collectors.toList());
     }
 }

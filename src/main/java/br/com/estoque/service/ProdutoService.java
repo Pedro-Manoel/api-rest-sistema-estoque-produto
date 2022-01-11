@@ -1,19 +1,20 @@
 package br.com.estoque.service;
 
-import br.com.estoque.model.Produto;
+import br.com.estoque.dto.ProdutoDTO;
+import br.com.estoque.dto.ProdutoEstoqueDTO;
 
 import java.util.List;
 
 public interface ProdutoService {
-    Produto getProdutoById (Long id);
+    ProdutoDTO getProduto (Long id);
 
-    Produto criarProduto(Produto produto);
+    ProdutoDTO criarProduto (ProdutoDTO produtoDTO);
 
-    List<Produto> listarProdutos ();
+    List<ProdutoDTO> listarProdutos ();
 
     void removerProduto (Long id);
 
-    Produto atualizarProduto (Long id, Produto produto);
+    ProdutoDTO atualizarProduto (Long id, ProdutoDTO produtoDTO);
 
-    Produto atualizarEstoqueProduto (Long id, Long novoEstoque);
+    ProdutoDTO atualizarEstoqueProduto (Long id, ProdutoEstoqueDTO produtoEstoqueDTO);
 }
